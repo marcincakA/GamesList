@@ -22,7 +22,12 @@
             @csrf
             <button>Log out</button>
         </form>
-
+        @if(auth()->user()->isAdmin)
+            <p>Welcome, admin!</p>
+            <a href="/add-game">Pridaj Hru</a>
+        @else
+            <p>Welcome, user!</p>
+        @endif
     @else
         <div style="border: 3px solid black;">
             <h2>Register</h2>
@@ -44,5 +49,6 @@
             </form>
         </div>
     @endauth
+    <a href="/viewGames">View games</a>
     </body>
 </html>
