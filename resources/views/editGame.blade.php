@@ -18,9 +18,10 @@
         <input name = "category2" type="text" placeholder="Category2" value = "{{$game->category2}}">
         <input name = "category3" type="text" placeholder="Category3" value = "{{$game->category3}}">
         <input name = "image" type="text" placeholder="Image" value = "{{$game->image}}">
-        <textarea name="popis" type="text" placeholder="nieco o hre">{{$game->popis}}</textarea>
+        <textarea name="popis" type="text" placeholder="nieco o hre">{{$game->Popis}}</textarea> {{--//normalne by som sa zabil za toto velke pismeno na zaciatku 20 min debugu--}}
         <button>Uprav hru</button>
     </form>
+    <a href="/back">Back</a>
 </div>
 @if ($errors->any())
     <div class="alert alert-danger">

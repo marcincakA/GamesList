@@ -40,3 +40,7 @@ Route::delete('/delete-game/{game}', [GameController::class, 'deleteGame']);
 Route::get('/edit-game/{game}', [GameController::class, 'showEditScreen']);
 
 Route::put('/edit-game/{game}', [GameController::class, 'updateGame']);
+
+Route::get('/back', function () {
+    return redirect('/viewGames'); //asi bude lepsie ked pridem na to ako efektivne skladat tie urlky
+});
