@@ -19,10 +19,16 @@
             <input name = "image" type="text" placeholder="Image">
             <textarea name="popis" type="text" placeholder="nieco o hre"></textarea>
             <button>Pridaj hru</button>
-
-
         </form>
     </div>
-
+    @if ($errors->any())
+        <div class="alert alert-danger">
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
 </body>
 </html>

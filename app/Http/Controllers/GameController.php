@@ -8,7 +8,15 @@ use Illuminate\Http\Request;
 class GameController extends Controller
 {
     function viewGames() {
-        return view('gamesList');
+        $games = Game::all();
+        return view('gamesList', ['games' => $games]);
+    }
+
+    function deleteGame(Game $game) {
+        if(auth()->user()->isAdmin) {
+            $game->delete();
+        }
+        return redirect('/');
     }
     function redirect_to_addGame() {
         if (auth()->user()->isAdmin) {
@@ -20,9 +28,9 @@ class GameController extends Controller
     function add_Game(Request $request)
     {
         $user = auth()->user();
-        if ($user && $user->isAdmin()) {
+        if ($user && $user->isAdmin) {
             $incomingFields = $request->validate([
-                'title' => ['required'], //nedavam unique, ani ziadne ine obmedzenia, boh zna jake hry existuju
+                'title' => ['required'], //nedavam unique, ani ziadne ine obmedzenia, boh zna jake hry existuju, ak sa omylom pridaju rovnake treba odstranit rucne
                 'publisher' => ['required'],
                 'popis' => ['required', 'min:10'],
                 'developer' => 'sometimes',
@@ -38,7 +46,37 @@ class GameController extends Controller
             }
 
             Game::create($incomingFields);
-            return redirect('/');
         }
+
+        return view('welcome');
+
+
+    }
+
+    function showEditScreen(Game $game) {
+        if (auth()->user()?->isAdmin) {
+            return view('editGame', ['game' => $game]);
+        }
+        return redirect('/');
+    }
+
+    function updateGame(Request $request, Game $game) {
+        $incomingFields = $request->validate([
+            'title' => ['required'], //nedavam unique, ani ziadne ine obmedzenia, boh zna jake hry existuju, ak sa omylom pridaju rovnake treba odstranit rucne
+            'publisher' => ['required'],
+            'popis' => ['required', 'min:10'],
+            'developer' => 'sometimes',
+            'category1' => 'sometimes',
+            'category2' => 'sometimes',
+            'category3' => 'sometimes',
+            'image' => 'sometimes'
+        ]);
+
+        foreach ($incomingFields as $key => $value) {
+            $incomingFields[$key] = strip_tags($value);
+        }
+
+        $game->update($incomingFields);
+        return redirect('/');
     }
 }

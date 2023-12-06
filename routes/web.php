@@ -34,3 +34,9 @@ Route::post('/addGame', [GameController::class, 'add_Game']);
 
 //Game-list routes
 Route::get('/viewGames', [GameController::class, 'viewGames']);
+
+Route::delete('/delete-game/{game}', [GameController::class, 'deleteGame']);
+
+Route::get('/edit-game/{game}', [GameController::class, 'showEditScreen']);
+
+Route::put('/edit-game/{game}', [GameController::class, 'updateGame']);
