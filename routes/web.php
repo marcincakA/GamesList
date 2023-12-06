@@ -42,5 +42,8 @@ Route::get('/edit-game/{game}', [GameController::class, 'showEditScreen']);
 Route::put('/edit-game/{game}', [GameController::class, 'updateGame']);
 
 Route::get('/back', function () {
-    return redirect('/viewGames'); //asi bude lepsie ked pridem na to ako efektivne skladat tie urlky
+    return redirect('/..'); //asi bude lepsie ked pridem na to ako efektivne skladat tie urlky
 });
+Route::get('/viewGames/{id}/{title}', [GameController::class, 'showGamePage']);
+
+

@@ -10,7 +10,7 @@
 
     @foreach($games as $game)
         <div style = "background-color: rgb(128,128,128); padding: 10px; margin: 10px;">
-            <h3>{{$game['title']}}</h3>
+            <h3><a href="/viewGames/{{$game->id}}/{{$game->title}}">{{$game['title']}}</a></h3>
             {{$game['developer']}}
             {{$game['publisher']}}
             @if(auth()->user()?->isAdmin)

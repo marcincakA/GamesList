@@ -79,4 +79,13 @@ class GameController extends Controller
         $game->update($incomingFields);
         return redirect('/');
     }
+
+    function showGamePage($id) {
+        $game = Game::find($id);
+        if (!$game){
+            abort(404);
+        }
+        return view('gamePage', ['game' => $game]);
+    }
+
 }
