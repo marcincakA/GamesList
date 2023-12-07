@@ -25,7 +25,9 @@ Route::post('/logout', [UserController::class, 'logout']);
 
 Route::post('/login', [UserController::class, 'login']);
 
+Route::get('/editAccount/{userId}', [UserController::class, 'showEditScreen']);
 
+Route::put('/editAccount/{userId}', [UserController::class, 'updateUser']);
 //Game routes
 Route::get('/add-game', [GameController::class, 'redirect_to_addGame']);
 
@@ -42,8 +44,11 @@ Route::get('/edit-game/{game}', [GameController::class, 'showEditScreen']);
 Route::put('/edit-game/{game}', [GameController::class, 'updateGame']);
 
 Route::get('/back', function () {
-    return redirect('/..'); //asi bude lepsie ked pridem na to ako efektivne skladat tie urlky
+    return redirect('/..');  //asi bude lepsie ked pridem na to ako efektivne skladat tie urlky
 });
+
 Route::get('/viewGames/{id}/{title}', [GameController::class, 'showGamePage']);
+
+
 
 

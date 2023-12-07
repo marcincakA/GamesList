@@ -49,4 +49,41 @@ class UserController extends Controller
         return redirect('/');
 
     }
+
+    function showEditScreen($id) {
+
+        $user = User::find($id);
+        if (auth()->user()->id == $user->id || auth()->user()->isAdmin) {
+            return view('editAccount', ['user' => $user]);
+        }
+        return redirect('/');
+    }
+
+    function updateUser($id, Request $request) {
+        //@dd($id);
+
+        $incomingFields = $request->validate([
+            'name' => ['required', 'min:3', 'max:10'],
+            'email' => ['required', 'email'],
+            'password'=> ['required', 'min:8', 'max:20'],
+            'isAdmin' => []
+        ]);
+        $incomingFields['isAdmin'] = $request->has('isAdmin') ? 1 : 0;
+        //@dd($incomingFields);
+        foreach ($incomingFields as $key => $value) {
+            $incomingFields[$key] = strip_tags($value);
+        }
+        $incomingFields['password'] = bcrypt($incomingFields['password']);
+
+        $user = User::find($id);
+
+        //@dd($user->name);
+        if (auth()->user()->id == $user->id || auth()->user()->isAdmin) {
+            $user->update($incomingFields);
+            //@dd($user->id);
+            return redirect("/");
+
+        }
+
+    }
 }

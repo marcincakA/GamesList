@@ -38,6 +38,15 @@
                 <input name ="password" type="password" placeholder="password">
                 <button>Register</button>
             </form>
+            @if ($errors->any())
+                <div class="alert alert-danger">
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
         </div>
         <div style="border: 3px solid black;">
             <h2>Login</h2>
@@ -47,8 +56,20 @@
                 <input name ="login_password" type="password" placeholder="password">
                 <button>Login</button>
             </form>
+            @if ($errors->any())
+                <div class="alert alert-danger">
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
         </div>
     @endauth
     <a href="/viewGames">View games</a>
+    @auth
+    <a href="/editAccount/{{auth()->user()->id}}">Edit account</a>
+    @endauth
     </body>
 </html>
