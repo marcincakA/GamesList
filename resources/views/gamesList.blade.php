@@ -15,12 +15,22 @@
             {{$game['publisher']}}
             @if(auth()->user()?->isAdmin)
             <p><a href="/edit-game/{{$game->id}}">Edit</a></p>
-            <form action="/delete-game/{{$game->id}}" method = "POST">
+            <form action="/delete-game/{{$game->id}}" method = "POST"  onsubmit="return confirmReq()">
                 @csrf
                 @method('DELETE')
-                <button>DELETE</button>
+                <button type="submit">DELETE</button>
+
+
+
             @endif
         </div>
     @endforeach
+
+    <script>
+        function confirmReq() {
+            var yesNo = confirm("Naozaj chces vymazat tuto hru?");
+            return yesNo
+        }
+    </script>
 </body>
 </html>

@@ -10,14 +10,14 @@
     <div style="border: 3px solid;">
         <form action="/addGame" method="POST">
             @csrf
-            <input name = "title" type="text" placeholder="Game title">
-            <input name = "publisher" type="text" placeholder="Publisher">
+            <input name = "title" type="text" placeholder="Game title" required>
+            <input name = "publisher" type="text" placeholder="Publisher" required>
             <input name = "developer" type="text" placeholder="Developer">
             <input name = "category1" type="text" placeholder="Category1">
             <input name = "category2" type="text" placeholder="Category2">
             <input name = "category3" type="text" placeholder="Category3">
             <input name = "image" type="text" placeholder="Image">
-            <textarea name="popis" type="text" placeholder="nieco o hre"></textarea>
+            <textarea name="popis" type="text" placeholder="nieco o hre" required></textarea>
             <button>Pridaj hru</button>
         </form>
     </div>

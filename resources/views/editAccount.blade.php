@@ -10,12 +10,12 @@
     <form action="/editAccount/{{$user->id}}" method="POST">
         @csrf
         @method('PUT')
-        <input name="name" type="text" placeholder="name" value="{{$user->name}}">
-        <input name = "email" type="text" placeholder="email" value="{{$user->email}}">
-        <input name ="password" type="password" placeholder="password">
-        @auth
+        <input name="name" type="text" placeholder="name" value="{{$user->name}}" required>
+        <input name = "email" type="text" placeholder="email" value="{{$user->email}}" required>
+        <input name ="password" type="password" placeholder="password" required>
+        @if(auth()->user()?->isAdmin)
             Is admin:<input name = "isAdmin" type="checkbox"  {{$user->isAdmin == 1 ? 'checked' : ''}}>
-        @endauth
+        @endif
         <button>Uprav ucet</button>
     </form>
     @if ($errors->any())
@@ -27,10 +27,18 @@
             </ul>
         </div>
     @endif
-    <form action="/deleteAccount/{{$user->id}}" method="POST">
+    <form action="/deleteAccount/{{$user->id}}" method="POST" onsubmit="return confirmAccDel()">
         @csrf
         @method('DELETE')
         <button>DELETE ACCOUNT</button>
     </form>
+
+    <script>
+        function confirmAccDel() {
+            var yesNo = confirm("Naozaj chces vymazat tento ucet?");
+            return yesNo
+        }
+    </script>
+
 </body>
 </html>

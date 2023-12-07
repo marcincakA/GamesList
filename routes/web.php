@@ -28,6 +28,8 @@ Route::post('/login', [UserController::class, 'login']);
 Route::get('/editAccount/{userId}', [UserController::class, 'showEditScreen']);
 
 Route::put('/editAccount/{userId}', [UserController::class, 'updateUser']);
+
+Route::delete('/deleteAccount/{userId}', [UserController::class,'deleteUser']);
 //Game routes
 Route::get('/add-game', [GameController::class, 'redirect_to_addGame']);
 

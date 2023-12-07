@@ -78,12 +78,18 @@ class UserController extends Controller
         $user = User::find($id);
 
         //@dd($user->name);
-        if (auth()->user()->id == $user->id || auth()->user()->isAdmin) {
+        if (auth()->user()?->id == $user->id || auth()->user()?->isAdmin) {
             $user->update($incomingFields);
             //@dd($user->id);
             return redirect("/");
 
         }
-
+    }
+    function  deleteUser($id) {
+        $user = User::find($id);
+        if (auth()->user()?->isAdmin || $user->id == auth()->user()?->id){
+            $user->delete();
+            }
+        return redirect('/');
     }
 }

@@ -33,9 +33,9 @@
             <h2>Register</h2>
             <form action="/register" method="POST">
                 @csrf
-                <input name="name" type="text" placeholder="name">
-                <input name = "email" type="text" placeholder="email">
-                <input name ="password" type="password" placeholder="password">
+                <input name="name" type="text" placeholder="name" required>
+                <input name = "email" type="text" placeholder="email" required>
+                <input name ="password" type="password" placeholder="password" required>
                 <button>Register</button>
             </form>
             @if ($errors->any())
@@ -52,8 +52,8 @@
             <h2>Login</h2>
             <form action="/login" method="POST">
                 @csrf
-                <input name="login_name" type="text" placeholder="name">
-                <input name ="login_password" type="password" placeholder="password">
+                <input name="login_name" type="text" placeholder="name" required>
+                <input name ="login_password" type="password" placeholder="password" required>
                 <button>Login</button>
             </form>
             @if ($errors->any())
